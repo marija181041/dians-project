@@ -1,0 +1,24 @@
+ЧЕКОРИ:
+
+1. Ги симнавме прво osmfilter (osmfilter.exe) и osmconvert (osmconvert64-0.8.8p.exe). 
+   Линкови:
+   - https://wiki.openstreetmap.org/wiki/Osmfilter
+   - https://wiki.openstreetmap.org/wiki/Osmconvert
+
+2. Потоа од https://www.openstreetmap.org ја најдовме и симнавме мапата на Општина Центар
+   - Го селектиравме Центар
+   - Кликнавме Export
+   - Ги имаме сите податоци за Центар во centar.osm дадотеката
+
+3. Ги исфилтриравме само податоците за рестораните во Центар со командата:
+   - .\osmfilter.exe .\centar.osm --keep="amenity=restaurant"
+   - користејќи го osmfilter и читајќи од centar.osm дадотеката, ги филтрира податоците по атрибутот amenity=restaurant
+
+4. Правиме pipelining (со | симболот) го следната команда:
+   - .\osmconvert64-0.8.8p.exe - --all-to-nodes --csv="@id @lon @lat name phone emergency website addr:street addr:postcode" --csv-headline --csv-separator="," -o="target.csv"
+   - користи osmconvert
+   - ги претвора во табели со атрибути id, lon, lan, name, phone, итн.
+   - ги разделува со запирка (,)
+   - ги запишва резултатите во target.csv дадотеката
+
+5. Ги имаме податоците во target.csv дадотеката
